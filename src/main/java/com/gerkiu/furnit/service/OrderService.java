@@ -16,4 +16,6 @@ public interface OrderService {
     void update(@NotNull(message = "The order cannot be null.") @Valid Order order);
 
     Order getOrder(@Min(value = 1L, message = "Invalid order ID.") long id);
+
+    Order replace(@Valid Order order, @Min(value = 1L, message = "Invalid order ID.") long id);
 }

@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService {
@@ -39,5 +42,18 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
+    }
+
+    @Override
+    public Order replace(@Valid Order newOrder, @Min(value = 1, message = "Invalid order ID.") long id) {
+        return orderRepository.findById(id)
+            .map(order -> {
+                order.setStatus(newOrder.getStatus());
+                return orderRepository.save(order);
+            })
+            .orElseGet(() -> {
+                newOrder.setId(id);
+                return orderRepository.save(newOrder);
+            });
     }
 }

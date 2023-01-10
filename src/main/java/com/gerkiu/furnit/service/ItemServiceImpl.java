@@ -36,10 +36,10 @@ public class ItemServiceImpl implements ItemService {
     public Item replace(Item newItem, long id) {
         return itemRepository.findById(id)
             .map(item -> {
-                item.setName(item.getName());
-                item.setDescription(item.getDescription());
-                item.setPrice(item.getPrice());
-                item.setPictureUrl(item.getPictureUrl());
+                item.setName(newItem.getName());
+                item.setDescription(newItem.getDescription());
+                item.setPrice(newItem.getPrice());
+                item.setPictureUrl(newItem.getPictureUrl());
                 return itemRepository.save(item);
             })
             .orElseGet(() -> {

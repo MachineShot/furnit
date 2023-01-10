@@ -26,7 +26,7 @@ export const ItemCard: React.FC<ItemProps> = ({
             borderRadius: "1g",
             overflow: "hidden"
         }}>
-            <img height={"100%"} src={cardImage}/>
+            <img height={"300px"} src={cardImage}/>
             <Box 
             sx={{
                 p: "6px"
@@ -90,11 +90,16 @@ export const ItemCard: React.FC<ItemProps> = ({
                     mt="4px"
                     justifyContent={"flex-end"}
                 >
-                    <Button variant="text">
-                        <Badge>
-                            <AddShoppingCartIcon/>
-                            Add to Cart
-                        </Badge>
+                    <Button 
+                        className="buy-button snipcart-add-item" 
+                        data-item-id={id}
+                        data-item-price={price}
+                        data-item-url="/"
+                        data-item-name={title}
+                        data-item-description={description}
+                        data-item-image={cardImage}
+                    >
+                        Add to Basket
                     </Button>
                 </Box>
             </Box>

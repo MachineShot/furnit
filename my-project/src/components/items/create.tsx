@@ -47,6 +47,16 @@ export const ItemCreate: React.FC = () => {
           rows={4}
         />
         <TextField
+          {...register("pictureUrl", {
+            required: "This field is required",
+          })}
+          error={!!errors.content}
+          margin="normal"
+          label="Picture URL"
+          multiline
+          rows={4}
+        />
+        <TextField
           {...register("price", {
             required: "This field is required",
           })}

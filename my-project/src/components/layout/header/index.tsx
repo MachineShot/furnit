@@ -10,8 +10,8 @@ import {
   Badge,
 } from "@pankod/refine-mui";
 import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { ColorModeContext } from "@contexts";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 export const Header: React.FC = () => {
   const { mode, setMode } = useContext(ColorModeContext);
@@ -28,10 +28,8 @@ export const Header: React.FC = () => {
           justifyContent="flex-end"
           alignItems="center"
         >
-          <IconButton aria-label="cart">
-            <Badge badgeContent={4} color="secondary">
-              <ShoppingBasketIcon />
-            </Badge>
+          <IconButton>
+            <ShoppingCartOutlinedIcon className="header__summary snipcart-checkout snipcart-summary" href="#"/>
           </IconButton>
           <IconButton
             onClick={() => {

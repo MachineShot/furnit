@@ -5,9 +5,23 @@ import {
 } from "@pankod/refine-nextjs-router";
 import dataProvider from "@pankod/refine-simple-rest";
 import { API_URL } from "lib/constants";
+import { checkAuthentication } from "@pankod/refine-nextjs-router";
+import { authProvider } from "src/authProvider";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { resource, action, id } = handleRefineParams(context.params?.refine);
+
+  const { isAuthenticated, ...authenticationValues } =
+    await checkAuthentication(authProvider, context);
+
+  if (!isAuthenticated) {
+    return {
+      ...authenticationValues,
+      props: {
+        ...("props" in authenticationValues ? authenticationValues.props : {}),
+      },
+    };
+  }
 
   try {
     if (resource && action === "show" && id) {
@@ -43,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default NextRouteComponent;
+export default NextRouteComponent.bind({ initialRoute: "/store" });;
 
 /**
  * To define a custom initial route for refine to redirect and start with:

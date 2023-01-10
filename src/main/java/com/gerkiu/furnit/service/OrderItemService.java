@@ -2,7 +2,6 @@ package com.gerkiu.furnit.service;
 
 import com.gerkiu.furnit.model.OrderItem;
 import javax.validation.constraints.NotNull;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;

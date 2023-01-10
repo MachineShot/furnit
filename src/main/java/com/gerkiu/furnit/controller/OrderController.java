@@ -77,6 +77,9 @@ public class OrderController {
         return new ResponseEntity<>(order, headers, HttpStatus.CREATED);
     }
 
+    @PatchMapping("/{id}")
+    public Order updateOrder(@RequestBody Order order, @PathVariable long id) { return orderService.replace(order, id); }
+
     private void validateItemsExistence(List<OrderItemDto> orderItems) {
         List<OrderItemDto> list = orderItems
                 .stream()

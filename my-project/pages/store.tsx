@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import { IItem } from "src/interfaces";
 import dataProvider from "@pankod/refine-simple-rest";
 import { GetListResponse, useTable, LayoutWrapper } from "@pankod/refine-core";
-import { ItemCard } from "@components/store/itemCard";
+import { ItemCard } from "@components/store";
 import { Grid } from "@pankod/refine-mui";
 
 type ItemProps = {
@@ -16,7 +16,7 @@ export const ProductList: React.FC<ItemProps> = ({ items }) => {
         queryOptions: {
             initialData: items,
         },
-        metaData: { populate: ["image"] },
+        metaData: { populate: ["pictureUrl"] },
     });
 
     return (
@@ -45,7 +45,7 @@ export default ProductList;
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const data = await dataProvider(API_URL).getList<IItem>({
         resource: "items",
-        metaData: { populate: ["image"] },
+        metaData: { populate: ["pictureUrl"] },
     });
 
     return {

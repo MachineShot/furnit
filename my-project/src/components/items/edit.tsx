@@ -13,7 +13,6 @@ import { IItem } from "src/interfaces";
 export const ItemEdit: React.FC = () => {
   const {
     saveButtonProps,
-    refineCore: { queryResult },
     register,
     control,
     formState: { errors },
@@ -26,6 +25,17 @@ export const ItemEdit: React.FC = () => {
         sx={{ display: "flex", flexDirection: "column" }}
         autoComplete="off"
       >
+        <TextField
+          {...register("id", {
+            required: "This field is required",
+          })}
+          error={!!errors.title}
+          margin="normal"
+          fullWidth
+          label="Name"
+          name="name"
+          autoFocus
+        />
         <TextField
           {...register("name", {
             required: "This field is required",

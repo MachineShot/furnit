@@ -1,7 +1,9 @@
 package com.gerkiu.furnit.controller;
 
 import com.gerkiu.furnit.model.Item;
+import com.gerkiu.furnit.repository.ItemRepository;
 import com.gerkiu.furnit.service.ItemService;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
@@ -11,9 +13,11 @@ import javax.validation.constraints.NotNull;
 public class ItemController {
 
     private ItemService itemService;
+    private final ItemRepository repository;
 
-    public ItemController(ItemService itemService) {
+    public ItemController(ItemService itemService, ItemRepository repository) {
         this.itemService = itemService;
+        this.repository = repository;
     }
 
     @GetMapping(value = { "", "/" })
@@ -27,9 +31,11 @@ public class ItemController {
     @PostMapping()
     public Item newItem(@RequestBody Item item) { return itemService.save(item); }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Item replaceItem(@RequestBody Item item, @PathVariable long id) { return itemService.replace(item, id); }
 
-    @DeleteMapping("/{id}")
-    public void deleteItem(@PathVariable long id) { itemService.delete(id); }
+    @DeleteMapping(value = { "/{id}", "/{id}/" })
+    void deleteEmployee(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
 }
